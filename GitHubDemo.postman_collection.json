@@ -1,0 +1,601 @@
+{
+	"info": {
+		"_postman_id": "1f7886b5-17ae-4072-b835-25aac2c66fd4",
+		"name": "GitHubDemo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET Issues",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var body = pm.response.json();\r",
+							"pm.test(\"Check Title Content\", function()\r",
+							"{\r",
+							"pm.expect(body[0].title).to.include(\"Postman\")\r",
+							"\r",
+							"}\r",
+							")"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{token}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "IvayloGodu",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.github.com/repos/{{user}}/{{repo}}/issues",
+					"protocol": "https",
+					"host": [
+						"api",
+						"github",
+						"com"
+					],
+					"path": [
+						"repos",
+						"{{user}}",
+						"{{repo}}",
+						"issues"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET particular Issue ",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let body = pm.response.json();\r",
+							"pm.test(\"Check Status Code\", function()\r",
+							"{\r",
+							"    pm.expect(pm.response.code).to.equal(200)\r",
+							"})\r",
+							"pm.test(\"Check Status\", function()\r",
+							"{\r",
+							"    pm.response.to.have.status(\"OK\")\r",
+							"})\r",
+							"pm.test(\"Check the URL\", function()\r",
+							"{\r",
+							"   \r",
+							"    pm.expect(body.url, \"URL property\").to.have.equal(\"https://api.github.com/repos/IvayloGodu/Issues-by-Postman-Demo/issues/1\")\r",
+							"})\r",
+							"pm.test(\"Check Issue number\", function()\r",
+							"{\r",
+							"    \r",
+							"    pm.expect(body.number, \"Issue number\").to.have.equal(1)\r",
+							"})\r",
+							"pm.test(\"Check Issue ID\", function()\r",
+							"{\r",
+							"    \r",
+							"    pm.expect(body.id, \"Issue number\").to.have.equal(1232969151)\r",
+							"})\r",
+							"pm.test(\"Check Issue Title\", function()\r",
+							"{\r",
+							"    \r",
+							"    pm.expect(body.title,\"Issue Title\").to.have.equal(\"Edit by Postman\")\r",
+							"})\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{token}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "IvayloGodu",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.github.com/repos/{{user}}/{{repo}}/issues/1",
+					"protocol": "https",
+					"host": [
+						"api",
+						"github",
+						"com"
+					],
+					"path": [
+						"repos",
+						"{{user}}",
+						"{{repo}}",
+						"issues",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET particular Issue  Labels",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{token}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "IvayloGodu",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.github.com/repos/{{user}}/{{repo}}/issues/9/labels",
+					"protocol": "https",
+					"host": [
+						"api",
+						"github",
+						"com"
+					],
+					"path": [
+						"repos",
+						"{{user}}",
+						"{{repo}}",
+						"issues",
+						"9",
+						"labels"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET particular issue with comment",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{token}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "IvayloGodu",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.github.com/repos/{{user}}/{{repo}}/issues/1/comments",
+					"protocol": "https",
+					"host": [
+						"api",
+						"github",
+						"com"
+					],
+					"path": [
+						"repos",
+						"{{user}}",
+						"{{repo}}",
+						"issues",
+						"1",
+						"comments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET particular issue with ID and comment",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{token}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "IvayloGodu",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.github.com/repos/{{user}}/{{repo}}/issues/1#issuecomment-1126775430",
+					"protocol": "https",
+					"host": [
+						"api",
+						"github",
+						"com"
+					],
+					"path": [
+						"repos",
+						"{{user}}",
+						"{{repo}}",
+						"issues",
+						"1"
+					],
+					"hash": "issuecomment-1126775430"
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CREATE Issue",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let body = pm.response.json();\r",
+							"let number = body.number;\r",
+							"\r",
+							"pm.test(\"Check Status Code\", function()\r",
+							"{\r",
+							"    pm.expect(pm.response.code).to.equal(201)\r",
+							"})\r",
+							"pm.test(\"Check Status\", function()\r",
+							"{\r",
+							"    pm.response.to.have.status(\"Created\")\r",
+							"})\r",
+							"pm.test(\"Check the URL\", function()\r",
+							"{\r",
+							"    url = \"https://api.github.com/repos/IvayloGodu/Issues-by-Postman-Demo/issues/\" + number\r",
+							"  pm.expect(body.url, \"URL property\").to.have.equal(url)\r",
+							"})\r",
+							"pm.test(\"Check Issue number\", function()\r",
+							"{\r",
+							"    \r",
+							"    pm.expect(body.number, \"Issue number\").to.be.greaterThan(1)\r",
+							"})\r",
+							"pm.test(\"Check Issue ID\", function()\r",
+							"{\r",
+							"    \r",
+							"    pm.expect(body.id, \"Issue number\").to.be.greaterThan(1)\r",
+							"})\r",
+							"pm.test(\"Check Issue Title\", function()\r",
+							"{\r",
+							"    \r",
+							"    pm.expect(body.title,\"Issue Title\").to.include(\"Postman\")\r",
+							"})\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{token}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "IvayloGodu",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\":\"Issue by Postman\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.github.com/repos/{{user}}/{{repo}}/issues",
+					"protocol": "https",
+					"host": [
+						"api",
+						"github",
+						"com"
+					],
+					"path": [
+						"repos",
+						"{{user}}",
+						"{{repo}}",
+						"issues"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CREATE Issue with Labels",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "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",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "IvayloGodu",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Issue by Postman with Labels\",\r\n    \"labels\": [\r\n        \"bug\",\r\n        \"UI\",\r\n        \"user\"\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.github.com/repos/{{user}}/{{repo}}/issues",
+					"protocol": "https",
+					"host": [
+						"api",
+						"github",
+						"com"
+					],
+					"path": [
+						"repos",
+						"{{user}}",
+						"{{repo}}",
+						"issues"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EDIT Issue",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "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",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "IvayloGodu",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\":\"Edit by Postman\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.github.com/repos/{{user}}/{{repo}}/issues/1",
+					"protocol": "https",
+					"host": [
+						"api",
+						"github",
+						"com"
+					],
+					"path": [
+						"repos",
+						"{{user}}",
+						"{{repo}}",
+						"issues",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CREATE Issue comment",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "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",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "IvayloGodu",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"body\":\"comment by Postman\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.github.com/repos/{{user}}/{{repo}}/issues/1/comments",
+					"protocol": "https",
+					"host": [
+						"api",
+						"github",
+						"com"
+					],
+					"path": [
+						"repos",
+						"{{user}}",
+						"{{repo}}",
+						"issues",
+						"1",
+						"comments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EDIT Issue existing comment",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "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",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "IvayloGodu",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"body\":\"comment(POST) & modiefy(PATCH) by Postman\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.github.com/repos/{{user}}/{{repo}}/issues/1#issue-1232969151",
+					"protocol": "https",
+					"host": [
+						"api",
+						"github",
+						"com"
+					],
+					"path": [
+						"repos",
+						"{{user}}",
+						"{{repo}}",
+						"issues",
+						"1"
+					],
+					"hash": "issue-1232969151"
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELATE existing comment",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "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",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "IvayloGodu",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://api.github.com/repos/{{user}}/{{repo}}/issues/comments/1126910220",
+					"protocol": "https",
+					"host": [
+						"api",
+						"github",
+						"com"
+					],
+					"path": [
+						"repos",
+						"{{user}}",
+						"{{repo}}",
+						"issues",
+						"comments",
+						"1126910220"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
